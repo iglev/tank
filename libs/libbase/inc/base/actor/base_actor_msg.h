@@ -29,7 +29,7 @@ enum ActorMsgType
 class ActorMsg
 {
 public:
-	ActorMsg(ActorMsgType iMsgId): mn_msgId(iMsgId) {}
+	ActorMsg(int iMsgId): mn_msgId(iMsgId) {}
 
 	virtual void Marshal(std::string& strData) = 0;
 	virtual void Unmarshal(const std::string& strData) = 0;
@@ -40,13 +40,13 @@ public:
 	{
 		std::stringstream buffer;
 		msgpack::pack(buffer, msgpack::type::make_tuple(std::forward<T>(args)...));
-		strData = buffer.str();
+		strData = std::move(buffer.str());
 	}
 
 	template<typename ...T>
 	void UnmarshalIn(const std::string& strData, T&& ...args)
 	{
-		msgpack::object_handle obj = msgpack::unpack(strData.c_str(), strData.size());
+		msgpack::object_handle obj = msgpack::unpack(strData.data(), strData.size());
 		auto tup = msgpack::type::make_tuple(std::forward<T>(args)...);
 		obj.get().convert(tup);
 		std::tie(std::forward<T>(args)...) = std::move(tup);

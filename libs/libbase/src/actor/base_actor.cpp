@@ -18,13 +18,6 @@ Actor::~Actor()
 	removeAll();
 }
 
-/*
-
-
-
-
-*/
-
 bool Actor::addActor(ActorPtr& pActor)
 {
 	if (!pActor) {

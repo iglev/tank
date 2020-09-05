@@ -1,0 +1,39 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="common">
+      <UniqueIdentifier>{7b54498a-9e43-4139-b6b5-eeae74fd2aed}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="tcp">
+      <UniqueIdentifier>{897115d4-d95a-4de7-a3f4-bcbb6b3ca7ca}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="tcp\srv">
+      <UniqueIdentifier>{ee5f739f-eaab-499e-9263-21fd44eb3df9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="tcp\clt">
+      <UniqueIdentifier>{a80fe9b8-68ff-4211-a88a-02e72a306d5d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="tcp\clt\imp">
+      <UniqueIdentifier>{f1f932a7-af32-41b6-b8e5-42ea50e52432}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="tcp\srv\imp">
+      <UniqueIdentifier>{7fa07f03-fc3f-4288-acb2-82c7778f3b78}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\src\address.h">
+      <Filter>common</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\net_config.h">
+      <Filter>common</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\net_packet.h">
+      <Filter>common</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\src\net_packet.cpp">
+      <Filter>common</Filter>
+    </ClCompile>
+  </ItemGroup>
+</Project>

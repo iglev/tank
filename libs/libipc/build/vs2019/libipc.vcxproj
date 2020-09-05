@@ -19,12 +19,20 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\src\address.h" />
-    <ClInclude Include="..\..\src\net_config.h" />
-    <ClInclude Include="..\..\src\net_packet.h" />
+    <ClInclude Include="..\..\inc\ipc\ipc_config.h" />
+    <ClInclude Include="..\..\inc\ipc\net_packet.h" />
+    <ClInclude Include="..\..\inc\ipc\tcp_clt_actor.h" />
+    <ClInclude Include="..\..\inc\ipc\tcp_srv_actor.h" />
+    <ClInclude Include="..\..\src\tcp\tcp_connection.h" />
+    <ClInclude Include="..\..\src\tcp\tcp_session.h" />
+    <ClInclude Include="..\..\src\tcp\tcp_srv_imp.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\src\net_packet.cpp" />
+    <ClCompile Include="..\..\src\tcp\tcp_clt_actor.cpp" />
+    <ClCompile Include="..\..\src\tcp\tcp_connection.cpp" />
+    <ClCompile Include="..\..\src\tcp\tcp_session.cpp" />
+    <ClCompile Include="..\..\src\tcp\tcp_srv_actor.cpp" />
+    <ClCompile Include="..\..\src\tcp\tcp_srv_imp.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>

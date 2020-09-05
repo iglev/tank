@@ -161,6 +161,7 @@
     <ClInclude Include="..\..\inc\base\exector\asio_svr.h" />
     <ClInclude Include="..\..\inc\base\safe_singleton.h" />
     <ClInclude Include="..\..\inc\base\typedef.h" />
+    <ClInclude Include="..\..\inc\base\utils\nuid.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\src\actor\base_actor.cpp" />

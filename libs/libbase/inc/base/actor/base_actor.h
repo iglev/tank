@@ -63,26 +63,26 @@ public:
 
 	std::vector<ActorPtr> getAllActor();
 
-	bool send(const std::string& strReceiver, const ActorMsgPtr& pMsg);
+	bool send(const std::string& strReceiver, const AmsgPtr& pMsg);
 
 private:
-	inline void sendIn(const ActorPtr& pReceiver, const std::string& strSender, const ActorMsgPtr& pMsg)
+	inline void sendIn(const ActorPtr& pReceiver, const std::string& strSender, const AmsgPtr& pMsg)
 	{
 		pReceiver->postIn(pReceiver, strSender, pMsg);
 	}
 
-	inline void postIn(const ActorPtr& pReceiver, const std::string& strSender, const ActorMsgPtr& pMsg)
+	inline void postIn(const ActorPtr& pReceiver, const std::string& strSender, const AmsgPtr& pMsg)
 	{
 		mo_channel.post(std::bind(&Actor::processIn, pReceiver, strSender, pMsg));
 	}
 
 private:
-	bool routeSend(const std::string& strSender, const std::string& strReceiver, const ActorMsgPtr& pMsg);
+	bool routeSend(const std::string& strSender, const std::string& strReceiver, const AmsgPtr& pMsg);
 
-	void processIn(const std::string& strSender, const ActorMsgPtr& pMsg);
+	void processIn(const std::string& strSender, const AmsgPtr& pMsg);
 
 private:
-	virtual void process(const std::string& strSender, const ActorMsgPtr& pMsg) = 0;
+	virtual void process(const std::string& strSender, const AmsgPtr& pMsg) = 0;
 
 private:
 	std::atomic<bool> mb_isValid;

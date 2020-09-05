@@ -21,19 +21,43 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\src\address.h">
+    <ClInclude Include="..\..\inc\ipc\ipc_config.h">
       <Filter>common</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\src\net_config.h">
+    <ClInclude Include="..\..\inc\ipc\net_packet.h">
       <Filter>common</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\src\net_packet.h">
-      <Filter>common</Filter>
+    <ClInclude Include="..\..\src\tcp\tcp_connection.h">
+      <Filter>tcp\clt\imp</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\inc\ipc\tcp_clt_actor.h">
+      <Filter>tcp\clt</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\tcp\tcp_srv_imp.h">
+      <Filter>tcp\srv\imp</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\tcp\tcp_session.h">
+      <Filter>tcp\srv\imp</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\inc\ipc\tcp_srv_actor.h">
+      <Filter>tcp\srv</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\src\net_packet.cpp">
-      <Filter>common</Filter>
+    <ClCompile Include="..\..\src\tcp\tcp_connection.cpp">
+      <Filter>tcp\clt\imp</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\tcp\tcp_clt_actor.cpp">
+      <Filter>tcp\clt\imp</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\tcp\tcp_srv_imp.cpp">
+      <Filter>tcp\srv\imp</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\tcp\tcp_srv_actor.cpp">
+      <Filter>tcp\srv\imp</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\tcp\tcp_session.cpp">
+      <Filter>tcp\srv\imp</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

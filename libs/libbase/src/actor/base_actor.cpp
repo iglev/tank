@@ -135,7 +135,7 @@ std::vector<ActorPtr> Actor::getAllActor()
 	return std::move(vecRes);
 }
 
-bool Actor::send(const std::string& strReceiver, const ActorMsgPtr& pMsg)
+bool Actor::send(const std::string& strReceiver, const AmsgPtr& pMsg)
 {
 	if (strReceiver.empty() || !pMsg) {
 		return false;
@@ -146,7 +146,7 @@ bool Actor::send(const std::string& strReceiver, const ActorMsgPtr& pMsg)
 ///////////////////////////////////////////////////////////////////
 // private
 
-bool Actor::routeSend(const std::string& strSender, const std::string& strReceiver, const ActorMsgPtr& pMsg)
+bool Actor::routeSend(const std::string& strSender, const std::string& strReceiver, const AmsgPtr& pMsg)
 {
 	std::unique_lock<std::mutex> lock(mo_mutex);
 
@@ -157,49 +157,53 @@ bool Actor::routeSend(const std::string& strSender, const std::string& strReceiv
 			// not found route actor
 			return false;
 		}
-		auto pRouteMsg = ActorMsgPtr(new RouteActorMsg(strSender, strReceiver, pMsg));
+		auto pRouteMsg = AmsgPtr(new RouteAmsg(strSender, strReceiver, pMsg));
 		sendIn(iterRouteActor->second, strSender, pRouteMsg);
 	}
 	sendIn(iterActor->second, strSender, pMsg);
 	return true;
 }
 
-void Actor::processIn(const std::string& strSender, const ActorMsgPtr& pMsg)
+void Actor::processIn(const std::string& strSender, const AmsgPtr& pMsg)
 {
 	if (!pMsg) {
 		return;
 	}
 
 	auto iMsgId = pMsg->mn_msgId;
-	if (iMsgId > ActorMsgType::ACTOR_INNER_MSG_GUARD) {
+	if (iMsgId > AmsgType::ACTOR_INNER_MSG_GUARD) {
 		this->process(strSender, pMsg);
 		return;
 	}
 
 	switch (iMsgId) {
-	case ActorMsgType::ACTOR_INNER_MSG_KILL_SELF:
+	case AmsgType::ACTOR_INNER_MSG_KILL_SELF:
 	{
-		// TODO
-		// ...
+		removeAll();
+		mb_isValid.store(false, std::memory_order_release);
 		break;
 	}
-	case ActorMsgType::ACTOR_INNER_MSG_ROUTE:
+	case AmsgType::ACTOR_INNER_MSG_ROUTE:
 	{
 		// route msg
-		RouteActorMsg* pRouteMsg = (RouteActorMsg*)(pMsg.get());
+		RouteAmsg* pRouteMsg = (RouteAmsg*)(pMsg.get());
 		routeSend(pRouteMsg->ms_sender, pRouteMsg->ms_receiver, pRouteMsg->mp_msg);
 		break;
 	}
-	case ActorMsgType::ACTOR_INNER_MSG_ADD_ACTOR:
+	case AmsgType::ACTOR_INNER_MSG_ADD_ACTOR:
 	{
-		// TODO
-		// ...
+		// add actor
+		AddActorAmsg* pAddMsg = (AddActorAmsg*)(pMsg.get());
+		addActorByList(pAddMsg->mo_list);
 		break;
 	}
-	case ActorMsgType::ACTOR_INNER_MSG_DEL_ACTOR:
+	case AmsgType::ACTOR_INNER_MSG_DEL_ACTOR:
 	{
-		// TODO
-		// ...
+		// del actor
+		DelActorAmsg* pDelMsg = (DelActorAmsg*)(pMsg.get());
+		for (auto iter = pDelMsg->mo_list.begin(); iter != pDelMsg->mo_list.end(); ++iter) {
+			removeActor(*iter);
+		}
 		break;
 	}
 	default:

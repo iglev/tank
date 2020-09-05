@@ -22,6 +22,9 @@
     <Filter Include="actor\imp">
       <UniqueIdentifier>{4455c0da-2889-4b53-a755-fc66187c6afe}</UniqueIdentifier>
     </Filter>
+    <Filter Include="utils">
+      <UniqueIdentifier>{101ef420-77a4-41a8-899c-aae06d918a08}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\inc\base\safe_singleton.h">
@@ -47,6 +50,9 @@
     </ClInclude>
     <ClInclude Include="..\..\inc\base\actor\base_actor_msg.h">
       <Filter>actor</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\inc\base\utils\nuid.h">
+      <Filter>utils</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

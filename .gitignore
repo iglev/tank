@@ -1,2 +1,17 @@
 3rdlibs/boost/inc/boost/*
+3rdlibs/boost/lib/*
+build/vs2019/.vs
+build/vs2019/libbase
+build/vs2019/test_base
+build/vs2019/test_base2
+apps/inc/
+apps/lib/
+libs/libbase/lib/
+libs/libbase/test/test_base/test_base.exe
+libs/libbase/test/test_base/test_base.ilk
+libs/libbase/test/test_base/test_base.pdb
+libs/libbase/test/test_base2/test_base2.exe
+libs/libbase/test/test_base2/test_base2.ilk
+libs/libbase/test/test_base2/test_base2.pdb
+
 

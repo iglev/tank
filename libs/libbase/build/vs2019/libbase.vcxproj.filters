@@ -1,0 +1,66 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="common">
+      <UniqueIdentifier>{d8bac148-6c27-42f3-b4f0-afd64d886816}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="exception">
+      <UniqueIdentifier>{c023ecfc-5378-4a4c-bb8f-76c8c55c41d2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="exception\imp">
+      <UniqueIdentifier>{f8d7e09a-b21b-45ba-bc79-67242745801c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="exector">
+      <UniqueIdentifier>{c3f1a436-81b9-4292-8428-5b8709478dcf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="exector\imp">
+      <UniqueIdentifier>{fe5d5f27-38ac-4546-89c0-e1297fc8c4ba}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="actor">
+      <UniqueIdentifier>{5160557c-1c0f-4bc9-9be8-ecd3dad32e2e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="actor\imp">
+      <UniqueIdentifier>{4455c0da-2889-4b53-a755-fc66187c6afe}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\inc\base\safe_singleton.h">
+      <Filter>common</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\inc\base\typedef.h">
+      <Filter>common</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\inc\base\exception\extrack.h">
+      <Filter>exception</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\inc\base\exception\trackinfo.h">
+      <Filter>exception</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\inc\base\exception\exstream_imp.h">
+      <Filter>exception</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\inc\base\exector\asio_svr.h">
+      <Filter>exector</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\inc\base\actor\base_actor.h">
+      <Filter>actor</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\inc\base\actor\base_actor_msg.h">
+      <Filter>actor</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\src\exception\exstream_imp.cpp">
+      <Filter>exception\imp</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\exception\extrack.cpp">
+      <Filter>exception\imp</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\exector\asio_svr.cpp">
+      <Filter>exector\imp</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\actor\base_actor.cpp">
+      <Filter>actor\imp</Filter>
+    </ClCompile>
+  </ItemGroup>
+</Project>

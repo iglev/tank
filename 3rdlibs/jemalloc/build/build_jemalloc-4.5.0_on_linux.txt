@@ -1,0 +1,24 @@
+﻿
+
+#解压
+tar -jxvf jemalloc-4.5.0.tar.bz2
+
+
+#进入目录
+cd jemalloc-4.5.0
+
+#编译安装到指定路径
+./configure --prefix=/data/svn/gse/3rdlibs/jemalloc/install
+make
+make install
+
+#把生成的so找出来放到lib下
+cd ../install/lib
+\cp -rf libjemalloc.so.2 ../../lib/
+
+#复制到系统目录
+\cp -rf libjemalloc.so.2 /usr/lib/gse/jemalloc/lib
+
+#在启动脚本加入以下指令，使得程序启动时优先使用
+LD_PRELOAD=/usr/lib/gse/jemalloc/lib/libjemalloc.so.2
+export LD_PRELOAD

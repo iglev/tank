@@ -1,0 +1,70 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30406.217
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "apps", "apps", "{996FC0E0-A015-4340-B60A-E8FA62657C87}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "engines", "engines", "{AD8B5D67-34BD-44AF-9DB1-390B4BBFCE22}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "libs", "libs", "{E5333097-DDED-439D-9EE3-29ED266BAD55}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "libbase", "..\..\libs\libbase\build\vs2019\libbase.vcxproj", "{38CBE9FA-E631-437D-B5EB-50A94CBA8CD4}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "test", "test", "{CFBFCA63-52CA-484E-8526-2B8535683D8F}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "test_base", "..\..\libs\libbase\test\test_base\test_base.vcxproj", "{DD0DA35A-BDBD-419D-8700-6E68EF3ABBCB}"
+	ProjectSection(ProjectDependencies) = postProject
+		{38CBE9FA-E631-437D-B5EB-50A94CBA8CD4} = {38CBE9FA-E631-437D-B5EB-50A94CBA8CD4}
+	EndProjectSection
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "test_base2", "..\..\libs\libbase\test\test_base2\test_base2.vcxproj", "{1AB105B9-D62D-456B-9E40-0E2D4C8771B0}"
+	ProjectSection(ProjectDependencies) = postProject
+		{38CBE9FA-E631-437D-B5EB-50A94CBA8CD4} = {38CBE9FA-E631-437D-B5EB-50A94CBA8CD4}
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|x64 = Debug|x64
+		Debug|x86 = Debug|x86
+		Release|x64 = Release|x64
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{38CBE9FA-E631-437D-B5EB-50A94CBA8CD4}.Debug|x64.ActiveCfg = Debug|x64
+		{38CBE9FA-E631-437D-B5EB-50A94CBA8CD4}.Debug|x64.Build.0 = Debug|x64
+		{38CBE9FA-E631-437D-B5EB-50A94CBA8CD4}.Debug|x86.ActiveCfg = Debug|Win32
+		{38CBE9FA-E631-437D-B5EB-50A94CBA8CD4}.Debug|x86.Build.0 = Debug|Win32
+		{38CBE9FA-E631-437D-B5EB-50A94CBA8CD4}.Release|x64.ActiveCfg = Release|x64
+		{38CBE9FA-E631-437D-B5EB-50A94CBA8CD4}.Release|x64.Build.0 = Release|x64
+		{38CBE9FA-E631-437D-B5EB-50A94CBA8CD4}.Release|x86.ActiveCfg = Release|Win32
+		{38CBE9FA-E631-437D-B5EB-50A94CBA8CD4}.Release|x86.Build.0 = Release|Win32
+		{DD0DA35A-BDBD-419D-8700-6E68EF3ABBCB}.Debug|x64.ActiveCfg = Debug|x64
+		{DD0DA35A-BDBD-419D-8700-6E68EF3ABBCB}.Debug|x64.Build.0 = Debug|x64
+		{DD0DA35A-BDBD-419D-8700-6E68EF3ABBCB}.Debug|x86.ActiveCfg = Debug|Win32
+		{DD0DA35A-BDBD-419D-8700-6E68EF3ABBCB}.Debug|x86.Build.0 = Debug|Win32
+		{DD0DA35A-BDBD-419D-8700-6E68EF3ABBCB}.Release|x64.ActiveCfg = Release|x64
+		{DD0DA35A-BDBD-419D-8700-6E68EF3ABBCB}.Release|x64.Build.0 = Release|x64
+		{DD0DA35A-BDBD-419D-8700-6E68EF3ABBCB}.Release|x86.ActiveCfg = Release|Win32
+		{DD0DA35A-BDBD-419D-8700-6E68EF3ABBCB}.Release|x86.Build.0 = Release|Win32
+		{1AB105B9-D62D-456B-9E40-0E2D4C8771B0}.Debug|x64.ActiveCfg = Debug|x64
+		{1AB105B9-D62D-456B-9E40-0E2D4C8771B0}.Debug|x64.Build.0 = Debug|x64
+		{1AB105B9-D62D-456B-9E40-0E2D4C8771B0}.Debug|x86.ActiveCfg = Debug|Win32
+		{1AB105B9-D62D-456B-9E40-0E2D4C8771B0}.Debug|x86.Build.0 = Debug|Win32
+		{1AB105B9-D62D-456B-9E40-0E2D4C8771B0}.Release|x64.ActiveCfg = Release|x64
+		{1AB105B9-D62D-456B-9E40-0E2D4C8771B0}.Release|x64.Build.0 = Release|x64
+		{1AB105B9-D62D-456B-9E40-0E2D4C8771B0}.Release|x86.ActiveCfg = Release|Win32
+		{1AB105B9-D62D-456B-9E40-0E2D4C8771B0}.Release|x86.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{38CBE9FA-E631-437D-B5EB-50A94CBA8CD4} = {E5333097-DDED-439D-9EE3-29ED266BAD55}
+		{DD0DA35A-BDBD-419D-8700-6E68EF3ABBCB} = {CFBFCA63-52CA-484E-8526-2B8535683D8F}
+		{1AB105B9-D62D-456B-9E40-0E2D4C8771B0} = {CFBFCA63-52CA-484E-8526-2B8535683D8F}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {10D5B803-2701-457C-9F43-0497F43C74A9}
+	EndGlobalSection
+EndGlobal

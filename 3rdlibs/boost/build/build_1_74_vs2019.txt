@@ -1,0 +1,8 @@
+bootstrap.bat
+
+采用以下两种编译方式：
+编译所有 64位，Release 版本，多线程，C++标准库静态链接库
+b2 --toolset=msvc-14.2 address-model=64 --prefix=../../ --build-dir=./build_temp --stagedir=../../ link=static threading=multi variant=release  runtime-link=shared stage
+
+编译所有 64位，Debug 版本，多线程，C++标准库静态链接库
+b2 --toolset=msvc-14.2 address-model=64 --prefix=../../ --build-dir=./build_temp --stagedir=../../ link=static threading=multi variant=debug  runtime-link=shared stage

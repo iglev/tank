@@ -213,6 +213,236 @@ public:
 ////////////////////////////////////////////////////////////////////////
 // tcp srv
 
+class TcpSOpenAmsg : public Amsg
+{
+	explicit TcpSOpenAmsg(uint32 uSrvID, const std::string &strIP, uint16 uPort, 
+		uint32 uMaxLimit, uint32 uCheckSeconds, uint32 uTimeoutSeconds)
+		: Amsg(AmsgType::TCP_S_OPEN)
+		, mn_srvid(uSrvID)
+		, mn_maxLimit(uMaxLimit)
+		, mn_checkSeconds(uCheckSeconds)
+		, mn_timeoutSeconds(uTimeoutSeconds)
+		, mn_port(uPort)
+		, ms_ip(strIP) {}
+	CANNOT_MARSHAL()
+public:
+	uint32 mn_srvid;
+	uint32 mn_maxLimit;
+	uint32 mn_checkSeconds;
+	uint32 mn_timeoutSeconds;
+	uint16 mn_port;
+	std::string ms_ip;
+};
+
+class TcpSSendAmsg : public Amsg
+{
+public:
+	explicit TcpSSendAmsg(uint32 uSrvID, uint32 uID, uint32 uSid, uint8 uMsgType, const std::string &strAddr, const std::string &strMsg)
+		: Amsg(AmsgType::TCP_S_SEND)
+		, mn_srvid(uSrvID)
+		, mn_id(uID)
+		, mn_sid(uSid)
+		, mn_msgtype(uMsgType)
+		, ms_sessionAddr(strAddr)
+		, ms_msg(strMsg) {}
+	CANNOT_MARSHAL()
+public:
+	uint32 mn_srvid;
+	uint32 mn_id;
+	uint32 mn_sid;
+	uint8 mn_msgtype;
+	std::string ms_sessionAddr;
+	std::string ms_msg;
+};
+
+class TcpSCloseAmsg : public Amsg
+{
+public:
+	explicit TcpSCloseAmsg(uint32 uSrvID, const std::string& strAddr)
+		: Amsg(AmsgType::TCP_S_CLOSE)
+		, mn_srvid(uSrvID)
+		, ms_sessionAddr(strAddr) {}
+	CANNOT_MARSHAL()
+public:
+	uint32 mn_srvid;
+	std::string ms_sessionAddr;
+};
+
+class TcpSCloseSafeAmsg : public Amsg
+{
+public:
+	explicit TcpSCloseSafeAmsg(uint32 uSrvID, const std::string& strAddr)
+		: Amsg(AmsgType::TCP_S_CLOSE_SAFE)
+		, mn_srvid(uSrvID)
+		, ms_sessionAddr(strAddr) {}
+	CANNOT_MARSHAL()
+public:
+	uint32 mn_srvid;
+	std::string ms_sessionAddr;
+};
+
+class TcpSCloseAllAmsg : public Amsg
+{
+public:
+	explicit TcpSCloseAllAmsg(uint32 uSrvID)
+		: Amsg(AmsgType::TCP_S_CLOSE_ALL)
+		, mn_srvid(uSrvID) {}
+	CANNOT_MARSHAL()
+public:
+	uint32 mn_srvid;
+};
+
+class TcpSCloseAllSafeAmsg : public Amsg
+{
+public:
+	explicit TcpSCloseAllSafeAmsg(uint32 uSrvID)
+		: Amsg(AmsgType::TCP_S_CLOSE_ALL_SAFE)
+		, mn_srvid(uSrvID) {}
+	CANNOT_MARSHAL()
+public:
+	uint32 mn_srvid;
+};
+
+class TcpSSettestAmsg : public Amsg
+{
+public:
+	explicit TcpSSettestAmsg(uint32 uSrvID, const std::string &strAddr, bool bPass)
+		: Amsg(AmsgType::TCP_S_SET_TESTING)
+		, mn_srvid(uSrvID)
+		, ms_sessionAddr(strAddr)
+		, mb_pass(bPass) {}
+	CANNOT_MARSHAL()
+public:
+	bool mb_pass;
+	uint32 mn_srvid;
+	const std::string ms_sessionAddr;
+};
+
+class TcpSSetActorAmsg : public Amsg
+{
+public:
+	explicit TcpSSetActorAmsg(uint32 uSrvID, const std::string &strAddr, ActorPtr &pActor)
+		: Amsg(AmsgType::TCP_S_SET_ACTOR)
+		, mn_srvid(uSrvID)
+		, ms_sessionAddr(strAddr)
+		, mp_actor(pActor) {}
+	CANNOT_MARSHAL()
+public:
+	uint32 mn_srvid;
+	std::string ms_sessionAddr;
+	ActorPtr mp_actor;
+};
+
+class TcpSStartUpCbAmsg : public Amsg
+{
+public:
+	explicit TcpSStartUpCbAmsg(uint32 uSrvID)
+		: Amsg(AmsgType::TCP_S_CB_STARTUP)
+		, mn_srvid(uSrvID) {}
+	CANNOT_MARSHAL()
+public:
+	uint32 mn_srvid;
+};
+
+class TcpSShutdownCbAmsg : public Amsg
+{
+public:
+	explicit TcpSShutdownCbAmsg(uint32 uSrvID)
+		: Amsg(AmsgType::TCP_S_CB_SHUTDOWN)
+		, mn_srvid(uSrvID) {}
+	CANNOT_MARSHAL()
+public:
+	uint32 mn_srvid;
+};
+
+class TcpSConnCbAmsg : public Amsg
+{
+public:
+	explicit TcpSConnCbAmsg(uint32 uSrvID, const std::string &strAddr, const std::string &strRemoteIP)
+		: Amsg(AmsgType::TCP_S_CB_CONNECTED)
+		, mn_srvid(uSrvID)
+		, ms_sessionAddr(strAddr)
+		, ms_remoteIP(strRemoteIP) {}
+	CANNOT_MARSHAL()
+public:
+	uint32 mn_srvid;
+	std::string ms_sessionAddr;
+	std::string ms_remoteIP;
+};
+
+class TcpSDisconnCbAmsg : public Amsg
+{
+public:
+	explicit TcpSDisconnCbAmsg(uint32 uSrvID, const std::string &strAddr, bool bCloseByRemote, const std::string &strMsg)
+		: Amsg(AmsgType::TCP_S_CB_DISCONNECTED)
+		, mb_closeByRemote(bCloseByRemote)
+		, mn_srvid(uSrvID)
+		, ms_sessionAddr(strAddr)
+		, ms_msg(strAddr) {}
+	CANNOT_MARSHAL()
+public:
+	bool mb_closeByRemote;
+	uint32 mn_srvid;
+	std::string ms_sessionAddr;
+	std::string ms_msg;
+};
+
+class TcpSRecvCbAmsg : public Amsg
+{
+public:
+	explicit TcpSRecvCbAmsg(uint32 uSrvID, const std::string &strAddr,
+		uint32 uID, uint32 uSid, uint8 uMsgType, const std::string &strMsg)
+		: Amsg(AmsgType::TCP_S_CB_RECV_DATA)
+		, mn_srvid(uSrvID)
+		, mn_id(uID)
+		, mn_sid(uSid)
+		, mn_msgtype(uMsgType)
+		, ms_sessionAddr(strAddr)
+		, ms_msg(strMsg) {}
+	CANNOT_MARSHAL()
+public:
+	uint32 mn_srvid;
+	uint32 mn_id;
+	uint32 mn_sid;
+	uint8 mn_msgtype;
+	std::string ms_sessionAddr;
+	std::string ms_msg;
+};
+
+class TcpSRecvTestCbAmsg : public Amsg
+{
+public:
+	explicit TcpSRecvTestCbAmsg(uint32 uSrvID, const std::string &strAddr, 
+		uint32 uID, uint32 uSid, uint8 uMsgType, const std::string &strMsg)
+		: Amsg(AmsgType::TCP_S_CB_RECV_TEST_DATA)
+		, mn_srvid(uSrvID)
+		, mn_id(uID)
+		, mn_sid(uSid)
+		, mn_msgtype(uMsgType)
+		, ms_sessionAddr(strAddr)
+		, ms_msg(strMsg) {}
+	CANNOT_MARSHAL()
+public:
+	uint32 mn_srvid;
+	uint32 mn_id;
+	uint32 mn_sid;
+	uint8 mn_msgtype;
+	std::string ms_sessionAddr;
+	std::string ms_msg;
+};
+
+class TcpSErrorCbAmsg : public Amsg
+{
+public:
+	explicit TcpSErrorCbAmsg(uint32 uSrvID, const std::string& strMsg)
+		: Amsg(AmsgType::TCP_S_CB_ERROR)
+		, mn_srvid(uSrvID)
+		, ms_msg(strMsg) {}
+	CANNOT_MARSHAL()
+public:
+	uint32 mn_srvid;
+	std::string ms_msg;
+};
 
 
 //////////////////////////////////////////////////////////////////////

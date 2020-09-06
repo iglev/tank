@@ -11,6 +11,9 @@
 #include <tuple>
 #include <unordered_map>
 
+#define ACTOR_CAST(T,p) ((T*)(p.get()))
+#define ALEV_ACTOR_ROOT "root"
+
 NamespaceStart
 
 class Actor;
@@ -41,12 +44,18 @@ public:
 		return mp_svr;
 	}
 
+	boost::asio::io_service::strand& getChannel()
+	{
+		return mo_channel;
+	}
+
 	bool isValid() const {
 		return mb_isValid.load(std::memory_order_acquire);
 	}
 
 	bool setRoute(const std::string& strRouteAddr) {
 		ms_routeAddr = strRouteAddr;
+		return true;
 	}
 
 	bool addActor(ActorPtr& pActor);

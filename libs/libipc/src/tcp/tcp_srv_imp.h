@@ -28,6 +28,68 @@ public:
 
 	~TcpSrvImp();
 
+public:
+	// listen
+	bool onListen(const std::string& strRoot, uint32 uSrvID, const std::string& strIP, 
+		uint16 uPort, uint32 uMaxLimit, uint32 uCheckTime = 1, uint32 uTimeout = 5);
+
+public:
+	// req
+	void reqShutdown(const AmsgPtr& pMsg);
+
+	void reqClose(const AmsgPtr& pMsg);
+
+	void reqCloseSafe(const AmsgPtr& pMsg);
+
+	void reqCloseAll(const AmsgPtr& pMsg);
+
+	void reqCloseAllSafe(const AmsgPtr& pMsg);
+
+	void reqSetTesting(const AmsgPtr& pMsg);
+
+	void reqSetActor(const AmsgPtr& pMsg);
+
+private:
+	// accepted fail
+	void doAcceptedFail(const boost::system::error_code& error, ActorPtr& pSession);
+
+	// accepted success
+	void doAccepted(const boost::system::error_code& error, ActorPtr& pSession);
+
+	// accepted
+	void onAccepted(ActorPtr& pSession);
+
+private:
+	// accept
+	void onAccept();
+
+private:
+	void doExpired(const boost::system::error_code& err);
+
+	void onExpired();
+
+public:
+	// cb
+	void cbOnSrvStartup();
+
+	void cbOnSrvShutdown();
+
+	void cbOnSrvConnected(const AmsgPtr &pMsg);
+
+	void cbOnSrvDisconnected(const AmsgPtr& pMsg);
+
+	void cbOnSrvRecvData(const AmsgPtr& pMsg);
+
+	void cbOnSrvRecvTestingData(const AmsgPtr& pMsg);
+
+private:
+	// utils
+	ActorPtr getNewSession(TcpSrvActor* pSrv, uint32 uSrvID, uint32 uSessionID);
+
+	void clearSession(const std::string& strAddr);
+
+	void closeAllSession(const std::string& strMsg, bool bSafe);
+
 private:
 	TcpSrvActor* mp_srvactor;
 	boost::asio::ip::tcp::acceptor* mp_acceptor;

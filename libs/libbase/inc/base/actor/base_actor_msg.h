@@ -34,7 +34,7 @@ NamespaceStart
 
 enum AmsgType
 {
-	// Actor 内部协议id
+	// Actor 锟节诧拷协锟斤拷id
 	ACTOR_INNER_MSG_ROUTE     = 1, // route
 	ACTOR_INNER_MSG_KILL_SELF = 2, // kill self
 	ACTOR_INNER_MSG_ADD_ACTOR = 3, // add actor
@@ -42,7 +42,7 @@ enum AmsgType
 
 	ACTOR_INNER_MSG_GUARD = 1000,
 
-	// Actor 外部协议id
+	// Actor 锟解部协锟斤拷id
 
 	ECHO_MSG = 1001, // echo msg
 
@@ -444,6 +444,167 @@ public:
 	std::string ms_msg;
 };
 
+////////////////////////////////////////////////////////////////////////
+// tcp clt
+
+class TcpCConnectAmsg : public Amsg
+{
+public:
+	explicit TcpCConnectAmsg(const std::string &strIp, uint16 uPort)
+		: Amsg(AmsgType::TCP_C_CONNECT)
+		, mn_port(uPort)
+		, ms_ip(strIp) {}
+	CANNOT_MARSHAL()
+public:
+	uint16 mn_port;
+	std::string ms_ip;
+};
+
+class TcpCSendAmsg : public Amsg
+{
+public:
+	explicit TcpCSendAmsg(const std::string &strConnAddr, uint32 uID, uint32 uSid,
+		uint8 uMsgType, const std::string &strMsg)
+		: Amsg(AmsgType::TCP_C_SEND)
+		, mn_id(uID)
+		, mn_sid(uSid)
+		, mn_msgtype(uMsgType)
+		, ms_connAddr(strConnAddr)
+		, ms_msg(strMsg) {}
+	CANNOT_MARSHAL()
+public:
+	uint32 mn_id;
+	uint32 mn_sid;
+	uint8 mn_msgtype;
+	std::string ms_connAddr;
+	std::string ms_msg;
+};
+
+class TcpCCloseAmsg : public Amsg
+{
+public:
+	explicit TcpCCloseAmsg()
+		: Amsg(AmsgType::TCP_C_CLOSE) {}
+};
+
+class TcpCCloseSafeAmsg : public Amsg
+{
+public:
+	explicit TcpCCloseSafeAmsg()
+		: Amsg(AmsgType::TCP_C_CLOSE_SAFE) {}
+};
+
+class TcpCIpsReqAmsg : public Amsg
+{
+public:
+	explicit TcpCIpsReqAmsg(const std::string &strUrl)
+		: Amsg(AmsgType::TCP_C_IPS_REQ)
+		, ms_url(strUrl) {}
+	CANNOT_MARSHAL()
+public:
+	std::string ms_url;
+};
+
+class TcpCIpsResAmsg : public Amsg
+{
+public:
+	explicit TcpCIpsResAmsg(std::vector<std::string> &vecIps)
+		: Amsg(AmsgType::TCP_C_IPS_RES)
+		, mo_ips(std::move(vecIps)) {}
+	CANNOT_MARSHAL()
+public:
+	std::vector<std::string> mo_ips;
+};
+
+class TcpCConnCbAmsg : public Amsg
+{
+public:
+	explicit TcpCConnCbAmsg(const std::string &strAddr)
+		: Amsg(AmsgType::TCP_C_CB_CONNECTED)
+		, ms_connAddr(strAddr) {}
+	CANNOT_MARSHAL()
+public:
+	std::string ms_connAddr;
+};
+
+class TcpCConnFailCbAmsg : public Amsg
+{
+public:
+	explicit TcpCConnFailCbAmsg(const std::string &strAddr, const std::string &strErrMsg)
+		: Amsg(AmsgType::TCP_C_CB_CONNECT_FAIL)
+		, ms_connAddr(strAddr)
+		, ms_errmsg(strErrMsg) {}
+	CANNOT_MARSHAL()
+public:
+	std::string ms_connAddr;
+	std::string ms_errmsg;
+};
+
+class TcpCDissconnCbAmsg : public Amsg
+{
+public:
+	explicit TcpCDissconnCbAmsg(const std::string &strAddr, const std::string &strMsg, bool bCloseByRemote)
+		: Amsg(AmsgType::TCP_C_CB_DISCONNECTED)
+		, mb_closedByRemote(bCloseByRemote)
+		, ms_connAddr(strAddr)
+		, ms_msg(strMsg) {}
+	CANNOT_MARSHAL()
+public:
+	bool mb_closedByRemote;
+	std::string ms_connAddr;
+	std::string ms_msg;
+};
+
+class TcpCRecvCbAmsg : public Amsg
+{
+public:
+	explicit TcpCRecvCbAmsg(const std::string &strAddr, uint32 uId, uint32 uSid,
+		uint8 uMsgType, const std::string &strMsg)
+		: Amsg(AmsgType::TCP_C_CB_RECV_DATA)
+		, mn_id(uId)
+		, mn_sid(uSid)
+		, mn_msgtype(uMsgType)
+		, ms_connAddr(strAddr)
+		, ms_msg(strMsg) {}
+	CANNOT_MARSHAL()
+public:
+	uint32 mn_id;
+	uint32 mn_sid;
+	uint8 mn_msgtype;
+	std::string ms_connAddr;
+	std::string ms_msg;
+};
+
+class TcpCRecvTestCbAmsg : public Amsg
+{
+public:
+	explicit TcpCRecvTestCbAmsg(const std::string &strAddr, uint32 uId, uint32 uSid,
+		uint8 uMsgType, const std::string &strMsg)
+		: Amsg(AmsgType::TCP_C_CB_RECV_TEST_DATA)
+		, mn_id(uId)
+		, mn_sid(uSid)
+		, mn_msgtype(uMsgType)
+		, ms_connAddr(strAddr)
+		, ms_msg(strMsg) {}
+	CANNOT_MARSHAL()
+public:
+	uint32 mn_id;
+	uint32 mn_sid;
+	uint8 mn_msgtype;
+	std::string ms_connAddr;
+	std::string ms_msg;
+};
+
+class TcpCErrorCbAmsg : public Amsg
+{
+public:
+	explicit TcpCErrorCbAmsg(const std::string &strErrMsg)
+		: Amsg(AmsgType::TCP_C_CB_ERROR)
+		, ms_errmsg(strErrMsg) {}
+	CANNOT_MARSHAL()
+public:
+	std::string ms_errmsg;
+};
 
 //////////////////////////////////////////////////////////////////////
 // other

@@ -30,7 +30,7 @@ public:
     }
 
 public:
-    void startConnect(const std::string &strRoot, const std::string &stIp, uint16 uPort);
+    void startConnect(const std::string &strRoot, const std::string &strIp, uint16 uPort);
 
     void doSendData(const void *pData, uint32 uLen);
 

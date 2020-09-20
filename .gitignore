@@ -6,6 +6,7 @@ build/vs2019/libbase
 build/vs2019/test_base
 build/vs2019/test_base2
 build/vs2019/libipc
+build/vs2019/test_ipc
 
 apps/inc/
 apps/lib/

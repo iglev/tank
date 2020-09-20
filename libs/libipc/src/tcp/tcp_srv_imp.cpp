@@ -27,17 +27,18 @@ TcpSrvImp::~TcpSrvImp()
 
 void TcpSrvImp::reqShutdown(const AmsgPtr& pMsg)
 {
-	TcpSCloseAmsg* pCloseMsg = (TcpSCloseAmsg*)(pMsg.get());
 	if (mb_closing)
 	{
-		LOGINFO(TI_LIBIPC, "TcpSrvImp::reqShutdown, srvid", pCloseMsg->mn_srvid);
+		LOGINFO(TI_LIBIPC, "TcpSrvImp::reqShutdown, closing");
 		return;
 	}
-	ActorPtr pSession = mp_srvactor->getActor(pCloseMsg->ms_sessionAddr);
-	if (!pSession)
+	mb_closing = true;
+
+	if (mp_acceptor)
 	{
-		LOGINFO(TI_LIBIPC, "TcpSrvImp::reqShutdown, not found session", pCloseMsg->ms_sessionAddr);
-		return;
+		boost::system::error_code error;
+		mp_acceptor->cancel(error);
+		mp_acceptor->close(error);
 	}
 	closeAllSession("TcpSrvImp::reqShutdown", true);
 }
@@ -176,6 +177,7 @@ bool TcpSrvImp::onListen(const std::string& strRoot, uint32 uSrvID, const std::s
 			mp_srvactor->getSvr()->getSvc(),
 			std::chrono::nanoseconds(mn_checkTime * 1000000000LL)
 		);
+		mp_acceptor = new boost::asio::ip::tcp::acceptor(mp_srvactor->getSvr()->getSvc());
 	}
 	catch (std::exception& e)
 	{

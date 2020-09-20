@@ -215,6 +215,7 @@ public:
 
 class TcpSOpenAmsg : public Amsg
 {
+public:
 	explicit TcpSOpenAmsg(uint32 uSrvID, const std::string &strIP, uint16 uPort, 
 		uint32 uMaxLimit, uint32 uCheckSeconds, uint32 uTimeoutSeconds)
 		: Amsg(AmsgType::TCP_S_OPEN)

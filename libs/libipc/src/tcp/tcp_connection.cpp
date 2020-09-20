@@ -55,7 +55,7 @@ inline void TcpConnection::doConnect(ActorPtr &pActor, const boost::system::erro
 
 void TcpConnection::onConnect(ActorPtr &pActor, const boost::system::error_code &error, boost::asio::ip::tcp::endpoint &endpoint)
 {
-    if(mn_sockState == TcpSockState::CLOSING || mn_sockState == TcpSockState::CLOSING)
+    if(mn_sockState == TcpSockState::CLOSING || mn_sockState == TcpSockState::CLOSED)
     {
         LOGINFO(TI_LIBIPC, "TcpConnection::onConnect, state", mn_sockState);
         return;
